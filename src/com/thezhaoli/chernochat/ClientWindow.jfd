@@ -1,0 +1,55 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.10" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundlePackage": "com.thezhaoli.chernochat"
+	"i18n.bundleName": "login"
+	"i18n.keyPrefix": "Client"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "16, 822:1.0, 145:1.0, 16"
+			"$hGap": 9
+			"$vGap": 9
+			"$alignLeft": true
+			"$alignTop": true
+			"$rowSpecs": "433:1.0, 40, 13"
+		} ) {
+			name: "this"
+			"title": "cherno chat client"
+			"$sizePolicy": 1
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", true ) )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "history"
+					"editable": false
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridwidth": 2
+				"insets": new java.awt.Insets( 6, 0, 0, 0 )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txtMessage"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "txtMessageKeyPressed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridy": 1
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSend"
+				"text": new FormMessage( null, "Client.btnSend.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSend", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 2
+				"gridy": 1
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 790, 475 )
+		} )
+	}
+}
