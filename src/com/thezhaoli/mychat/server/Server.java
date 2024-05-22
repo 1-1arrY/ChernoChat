@@ -1,39 +1,34 @@
-package com.thezhaoli.chernochat.server;
-
-import com.thezhaoli.chernochat.Client;
+package com.thezhaoli.mychat.server;
 
 import java.io.IOException;
-import java.lang.ref.Cleaner;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Server implements Runnable{
     private List<ServerClient> clients= new ArrayList<>();
-    private List<Integer> clientRespond = new ArrayList<>();
+    private List<Integer> clientRespond = new ArrayList<>(); //储存客户端的在线回应
     private int port;
-    private DatagramSocket socket;
+    private DatagramSocket server;
     private boolean running = false;
     private Thread run, manage, receive, send;
     private final int MAX_ATTEMPT = 5;
     public Server(int port) {
         this.port = port;
+
         try {
-            socket = new DatagramSocket(port);
-        } catch (SocketException e) {
-            e.printStackTrace();
-            return;
+            server = new DatagramSocket(port);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
         run = new Thread(this, "Server");
         run.start();
     }
 
     public void run() {
         running = true;
-        System.out.println("Server started on " + port);
+        System.out.println("服务器开始监听端口:" + port);
         manageClients();
         receive();
     }
@@ -78,7 +73,7 @@ public class Server implements Runnable{
             public void run() {
                 DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
                 try {
-                    socket.send(packet);
+                    server.send(packet);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -99,7 +94,7 @@ public class Server implements Runnable{
                     byte[] data = new byte[1024];
                     DatagramPacket packet = new DatagramPacket(data,data.length);
                     try {
-                        socket.receive(packet);
+                        server.receive(packet);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -113,7 +108,7 @@ public class Server implements Runnable{
         String string = new String(packet.getData());
         if (string.startsWith("/c/")) {
             String name = string.split("/c/|/e/")[1];
-            int id = UniqueIdentifier.getIdentifier();
+            int id = com.thezhaoli.mychat.server.UniqueIdentifier.getIdentifier();
             clients.add(new ServerClient(name, packet.getAddress(), packet.getPort(), id));
             System.out.println(name);
             System.out.println(packet.getAddress().toString() + ":" + packet.getPort());

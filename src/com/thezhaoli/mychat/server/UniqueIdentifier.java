@@ -1,4 +1,4 @@
-package com.thezhaoli.chernochat.server;
+package com.thezhaoli.mychat.server;
 
 import java.util.ArrayList;
 import java.util.Collections;

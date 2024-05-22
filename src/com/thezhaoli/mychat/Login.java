@@ -2,7 +2,9 @@
  * Created by JFormDesigner on Tue Apr 30 20:20:02 CST 2024
  */
 
-package com.thezhaoli.chernochat;
+package com.thezhaoli.mychat;
+
+import com.thezhaoli.mychat.ClientWindow;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -37,7 +39,7 @@ public class Login extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("com.thezhaoli.chernochat.login");
+        ResourceBundle bundle = ResourceBundle.getBundle("com.thezhaoli.mychat.login");
         label1 = new JLabel();
         txtName = new JTextField();
         txtAddress = new JTextField();

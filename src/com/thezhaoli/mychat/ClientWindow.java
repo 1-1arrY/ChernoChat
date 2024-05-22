@@ -2,7 +2,9 @@
  * Created by JFormDesigner on Wed May 01 09:40:08 CST 2024
  */
 
-package com.thezhaoli.chernochat;
+package com.thezhaoli.mychat;
+
+import com.thezhaoli.mychat.Client;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -100,7 +102,7 @@ public class ClientWindow extends JFrame implements Runnable{
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("com.thezhaoli.chernochat.login");
+        ResourceBundle bundle = ResourceBundle.getBundle("com.thezhaoli.mychat.login");
         scrollPane2 = new JScrollPane();
         history = new JTextArea();
         txtMessage = new JTextField();
@@ -109,6 +111,7 @@ public class ClientWindow extends JFrame implements Runnable{
         //======== this ========
         setTitle("cherno chat client");
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 thisWindowClosing(e);
             }

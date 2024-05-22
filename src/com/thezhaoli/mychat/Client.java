@@ -1,4 +1,4 @@
-package com.thezhaoli.chernochat;
+package com.thezhaoli.mychat;
 
 import java.io.IOException;
 import java.net.*;
