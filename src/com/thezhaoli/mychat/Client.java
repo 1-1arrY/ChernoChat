@@ -1,27 +1,22 @@
-package com.thezhaoli.chernochat;
+package com.thezhaoli.mychat;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.*;
 
 public class Client {
     private String name, address;
     private int port;
-    private InetAddress ip;
-    private DatagramSocket socket;
+    private Socket socket;
+    private InputStream in;
+    private OutputStream out;
     private Thread send;
-    private int ID = -1;
 
     public Client(String name, String address, int port) {
         this.name = name;
         this.address = address;
         this.port = port;
-    }
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public String getName() {
@@ -38,36 +33,38 @@ public class Client {
 
     public boolean openConnection(String address) {
         try {
-            socket = new DatagramSocket();
-            ip = InetAddress.getByName(address);
+            socket = new Socket(address, port);
+            in = socket.getInputStream();
+            out = socket.getOutputStream();
         } catch (UnknownHostException | SocketException e) {
             e.printStackTrace();
             return false;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return true;
     }
 
 
     public String receive() {
-        byte[] data = new byte[1024];
-        DatagramPacket packet = new DatagramPacket(data, data.length);
+        byte[] bytes = new byte[1024];
+        int i = 0;
         try {
-            socket.receive(packet);
-        } catch (IOException e)  {
-            e.printStackTrace();
+            i = in.read(bytes);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        String message = new String(packet.getData());
-        return message;
+
+        return new String(bytes, 0, i);
     }
 
     public void send(byte[] data) {
         send = new Thread("send") {
             public void run() {
-                DatagramPacket packet = new DatagramPacket(data,data.length,ip,port);
                 try {
-                    socket.send(packet);
+                    out.write(data);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         };
@@ -77,7 +74,11 @@ public class Client {
     public void close() {
         new Thread(() -> {
             synchronized (socket) {
-                socket.close();
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }).start();
 

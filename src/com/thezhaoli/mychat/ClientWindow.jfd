@@ -2,7 +2,7 @@ JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.10" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.autoExternalize": true
-	"i18n.bundlePackage": "com.thezhaoli.chernochat"
+	"i18n.bundlePackage": "com.thezhaoli.mychat"
 	"i18n.bundleName": "login"
 	"i18n.keyPrefix": "Client"
 	contentType: "form/swing"

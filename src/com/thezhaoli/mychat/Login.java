@@ -2,7 +2,8 @@
  * Created by JFormDesigner on Tue Apr 30 20:20:02 CST 2024
  */
 
-package com.thezhaoli.chernochat;
+package com.thezhaoli.mychat;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -37,7 +38,7 @@ public class Login extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("com.thezhaoli.chernochat.login");
+        ResourceBundle bundle = ResourceBundle.getBundle("com.thezhaoli.mychat.login");
         label1 = new JLabel();
         txtName = new JTextField();
         txtAddress = new JTextField();
@@ -55,10 +56,10 @@ public class Login extends JFrame {
         contentPane.setLayout(null);
 
         //---- label1 ----
-        label1.setText("Name:");
+        label1.setText("\u7528\u6237\u540d:");
         label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 3f));
         contentPane.add(label1);
-        label1.setBounds(140, 40, 55, 42);
+        label1.setBounds(140, 40, 100, 42);
 
         //---- txtName ----
         txtName.setFont(txtName.getFont().deriveFont(txtName.getFont().getSize() + 3f));
@@ -71,10 +72,10 @@ public class Login extends JFrame {
         txtAddress.setBounds(65, 150, 210, txtAddress.getPreferredSize().height);
 
         //---- label2 ----
-        label2.setText("IP Address:");
+        label2.setText("IP \u5730\u5740:");
         label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 3f));
         contentPane.add(label2);
-        label2.setBounds(115, 120, 115, 42);
+        label2.setBounds(140, 120, 105, 42);
 
         //---- txtPort ----
         txtPort.setFont(txtPort.getFont().deriveFont(txtPort.getFont().getSize() + 3f));
@@ -82,10 +83,10 @@ public class Login extends JFrame {
         txtPort.setBounds(65, 245, 210, txtPort.getPreferredSize().height);
 
         //---- label3 ----
-        label3.setText("Port:");
+        label3.setText("\u7aef\u53e3\u53f7:");
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 3f));
         contentPane.add(label3);
-        label3.setBounds(145, 215, 65, 42);
+        label3.setBounds(140, 215, 70, 42);
 
         //---- btnLogin ----
         btnLogin.setText(bundle.getString("Login.btnLogin.text"));

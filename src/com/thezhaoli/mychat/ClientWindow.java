@@ -2,14 +2,12 @@
  * Created by JFormDesigner on Wed May 01 09:40:08 CST 2024
  */
 
-package com.thezhaoli.chernochat;
+package com.thezhaoli.mychat;
+
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.io.Serial;
-import java.net.*;
-import java.sql.SQLOutput;
 import java.util.*;
 import javax.swing.*;
 
@@ -24,14 +22,14 @@ public class ClientWindow extends JFrame implements Runnable{
         client = new Client(name, address, port);
         boolean connect = client.openConnection(address);
         if (!connect) {
-            System.err.println("Connection failed!");
-            console("Connection failed!");
+            System.err.println("连接失败!");
+            console("连接失败!");
         }
         initComponents();
         setVisible(true);
         txtMessage.requestFocusInWindow();
-        console("Attempting to connect " + address + ":" + port + ", User:" + name);
-        String connection = "/c/" + name + "/e/";
+        console("正在尝试连接 " + address + ":" + port + ", User:" + name);
+        String connection = "/c/" + name;
         client.send(connection.getBytes());
         run = new Thread(this, "Running");
         run.start();
@@ -44,9 +42,9 @@ public class ClientWindow extends JFrame implements Runnable{
 
     private void send(String message, boolean text) {
         if (text){
-            if (txtMessage.getText().equals("")) return;
+            if (txtMessage.getText().isEmpty()) return;
             message = client.getName() + ":" + message;
-            message = "/m/" + message + "/e/";
+            message = "/m/" + message;
             txtMessage.setText("");
         }
         client.send(message.getBytes());
@@ -62,16 +60,10 @@ public class ClientWindow extends JFrame implements Runnable{
             public void run() {
                 while (running) {
                     String message = client.receive();
-                    if (message.startsWith("/c/")) {
-                        client.setID(Integer.parseInt(message.split("/c/|/e/")[1]));
-                        console("Successful connected to server!  ID:" + client.getID());
-                    } else if (message.startsWith("/m/")) {
+                    if (message.startsWith("/m/")) {
                         String text = message.substring(3);
-                        text = text.split("/e/")[0];
+                        //text = text.split("/e/")[0];
                         console(text);
-                    } else if (message.startsWith("/i/")) {
-                        String text = "/i/" + client.getID() + "/e/";
-                        send(text,false);
                     }
                 }
             }
@@ -92,7 +84,7 @@ public class ClientWindow extends JFrame implements Runnable{
     }
 
     private void thisWindowClosing(WindowEvent e) {
-        String disconnect = "/d/" + client.getID() + "/e/";
+        String disconnect = "/d/";
         send(disconnect, false);
         running = false;
         client.close();
@@ -100,7 +92,7 @@ public class ClientWindow extends JFrame implements Runnable{
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("com.thezhaoli.chernochat.login");
+        ResourceBundle bundle = ResourceBundle.getBundle("com.thezhaoli.mychat.login");
         scrollPane2 = new JScrollPane();
         history = new JTextArea();
         txtMessage = new JTextField();
@@ -109,6 +101,7 @@ public class ClientWindow extends JFrame implements Runnable{
         //======== this ========
         setTitle("cherno chat client");
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 thisWindowClosing(e);
             }

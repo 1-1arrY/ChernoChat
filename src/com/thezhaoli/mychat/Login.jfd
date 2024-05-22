@@ -1,8 +1,8 @@
-JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.10" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.11" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.autoExternalize": true
-	"i18n.bundlePackage": "com.thezhaoli.chernochat"
+	"i18n.bundlePackage": "com.thezhaoli.mychat"
 	"i18n.bundleName": "login"
 	"i18n.keyPrefix": "Login"
 	contentType: "form/swing"
@@ -17,11 +17,11 @@ new FormModel {
 			"$sizePolicy": 1
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "Name:"
+				"text": "用户名:"
 				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"y": 40
-				"width": 55
+				"width": 100
 				"height": 42
 				"x": 140
 			} )
@@ -43,12 +43,12 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
-				"text": "IP Address:"
+				"text": "IP 地址:"
 				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 115
+				"width": 105
 				"height": 42
-				"x": 115
+				"x": 140
 				"y": 120
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
@@ -61,12 +61,12 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label3"
-				"text": "Port:"
+				"text": "端口号:"
 				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 65
+				"width": 70
 				"height": 42
-				"x": 145
+				"x": 140
 				"y": 215
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {

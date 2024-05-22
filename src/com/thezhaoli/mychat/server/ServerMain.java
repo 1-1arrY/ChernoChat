@@ -1,4 +1,6 @@
-package com.thezhaoli.chernochat.server;
+package com.thezhaoli.mychat.server;
+
+import com.thezhaoli.mychat.server.Server;
 
 public class ServerMain {
     private int port;
@@ -12,7 +14,7 @@ public class ServerMain {
     public static void main(String[] args) {
         int port;
         if (args.length != 1) {
-            System.out.println("Usage: java -jar ChernoChatServer.jar [port]");
+            System.out.println("Usage: java -jar MyChatServer.jar [port]");
             return;
         }
         port = Integer.parseInt(args[0]);
